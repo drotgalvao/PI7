@@ -3,6 +3,7 @@ from utils.image_loader import load_image
 from utils.detection import detect_pieces, filter_by_rank
 from utils.nms import non_max_suppression
 from utils.crop_saver import save_crop, interactive_crop
+from extract_white_queen import extract_white_queen
 
 
 def main():
@@ -134,7 +135,6 @@ def main():
             saved_count = 0
             saved_types = {"black": set(), "white": set()}
 
-
             piece_names = {
                 0: {
                     "black": [
@@ -204,6 +204,9 @@ def main():
                             print(f"Falha ao salvar: {out_path}")
 
             print(f"\nTotal de peças únicas salvas: {saved_count}")
+
+            print("\n--- Extraindo rainha branca ---")
+            extract_white_queen(args.image)
         return
 
     saved = interactive_crop(img, boxes, mask, args.out)
